@@ -20,16 +20,6 @@ import decoratorsystem.util.FileProcessor;
 import decoratorsystem.adt.InputDetails;
 import decoratorsystem.adt.InputDetailsI;
 
-import decoratorsystem.adt.MyArray;
-import decoratorsystem.adt.MyArrayI;
-import decoratorsystem.adt.MyArrayList;
-import decoratorsystem.adt.MyArrayListI;
-
-import decoratorsystem.visitor.VisitorI;
-import decoratorsystem.visitor.CommonIntsVisitor;
-import decoratorsystem.visitor.MissingIntsVisitor;
-import decoratorsystem.visitor.PopulateMyArrayVisitor;
-
 
 /**
  * @author John Doe
