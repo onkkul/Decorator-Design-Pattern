@@ -19,6 +19,12 @@ import decoratorsystem.util.FileProcessor;
 
 import decoratorsystem.adt.InputDetails;
 import decoratorsystem.adt.InputDetailsI;
+import decoratorsystem.decorators.AbstractTextDecorator;
+import decoratorsystem.decorators.SentenceDecorator;
+import decoratorsystem.decorators.SpellCheckDecorator;
+import decoratorsystem.decorators.KeywordDecorator;
+import decoratorsystem.decorators.MostFrequentWordDecorator;
+
 
 
 /**
@@ -64,14 +70,15 @@ public class Driver {
             InputDetailsI inputADT = new InputDetails(fileNames);
 
 
-            // System.out.println(inputADT.getParagraph());
+            // System.out.println(inputADT.readParagraph());
             // System.out.println(inputADT.getMostFrequent());
             // System.out.println(Arrays.toString(inputADT.getMisSpelled()));
             // System.out.println(Arrays.toString(inputADT.getKeyWords()));
-            AbstractTextDecorator sentenceDecorator = new SentenceDecorator(null, inputD);
-            AbstractTextDecorator spellCheckDecorator = new SpellCheckDecorator(sentenceDecorator, inputD);
-            AbstractTextDecorator keywordDecorator = new KeywordDecorator(spellCheckDecorator, inputD);
-            AbstractTextDecorator mostFreqWordDecorator = new MostFrequentWordDecorator(keywordDecorator, inputD);
+            AbstractTextDecorator sentenceDecorator = new SentenceDecorator(null, inputADT);
+            AbstractTextDecorator spellCheckDecorator = new SpellCheckDecorator(sentenceDecorator, inputADT);
+            AbstractTextDecorator keywordDecorator = new KeywordDecorator(spellCheckDecorator, inputADT);
+            AbstractTextDecorator mostFreqWordDecorator = new MostFrequentWordDecorator(keywordDecorator, inputADT);
+            mostFreqWordDecorator.processInputDetails();
         }
         catch (Exception e){
             e.printStackTrace();
