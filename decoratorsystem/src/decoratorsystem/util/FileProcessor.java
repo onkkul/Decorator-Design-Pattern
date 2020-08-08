@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,6 +21,7 @@ import java.nio.file.InvalidPathException;
 */
 public final class FileProcessor {
 	private BufferedReader reader;
+	private Scanner scanner = null;
 
 	/**
 	 * Constructs a FileProcessor that can stream the contents of the
@@ -43,7 +45,8 @@ public final class FileProcessor {
         	throw new IOException("File is empty");
         }
 
-        reader = new BufferedReader(new FileReader(fileToRead));
+        // reader = new BufferedReader(new FileReader(fileToRead));
+		scanner = new Scanner(fileToRead);
 	}
 
 	/**
@@ -53,7 +56,10 @@ public final class FileProcessor {
 	 * @exception IOException On error encountered when reading from file.
 	 */
 	public String poll() throws IOException {
-		return reader.readLine();
+		// return reader.readLine();
+    	if (scanner.hasNext())
+        	return scanner.next();
+        return null;
 	}
 
 

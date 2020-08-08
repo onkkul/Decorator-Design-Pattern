@@ -17,10 +17,10 @@ public interface InputDetailsI{
     public String getParagraph() throws
         FileNotFoundException, IOException;
 
-    public HashMap<String, String> getMisSpelled() throws
+    public String[] getMisSpelled() throws
         FileNotFoundException, IOException;
 
-    public HashMap<String, String> getKeyWords()throws
+    public String[] getKeyWords()throws
         FileNotFoundException, IOException;
 
     public String getMostFrequent();

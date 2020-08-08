@@ -2,6 +2,8 @@ package decoratorsystem.adt;
 
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,9 +28,10 @@ public class InputDetails implements InputDetailsI{
     private String[] sentences;
     private String paragraph;
 
+    private List<String> list;
+    private String[] keywords = null;
+    private String[] misSpelled = null;
     private HashMap<String, Integer> frequency = new HashMap<String, Integer>();
-    private HashMap<String, String> keywords = new HashMap<String, String>();
-    private HashMap<String, String> misSpelled = new HashMap<String, String>();
 
     private int maxFreq = 0;
     private String mostFreqWord = "";
@@ -41,37 +44,33 @@ public class InputDetails implements InputDetailsI{
 
     }
 
-    public void countFreq(String sentence){
-        sentence = sentence.replace(".", "");
-        words = sentence.split(" ");
-        for(String word:words){
-            int previous = this.frequency.getOrDefault(word.toLowerCase(), 0);
-            previous = previous + 1;
-            this.frequency.put(word.toLowerCase(), previous);
+    public void countFrequency(String word){
+        word = word.replace(".", "");
+        int previous = this.frequency.getOrDefault(word.toLowerCase(), 0);
+        previous = previous + 1;
+        this.frequency.put(word.toLowerCase(), previous);
 
-            if (previous >= this.maxFreq){
-                this.maxFreq = previous;
-                this.mostFreqWord = word;
-            }
+        if (previous >= this.maxFreq){
+            this.maxFreq = previous;
+            this.mostFreqWord = word;
         }
     }
 
     public String[] getSentences(String prgrph){
         String[] allSentences = prgrph.split("(?<=[.!?])\\s*", -2);
-        for (String eachSentence : allSentences){
-            countFreq(eachSentence);
-        }
-        return sentences;
+        return allSentences;
     }
 
     @Override
     public String getParagraph()throws
         FileNotFoundException, IOException{
         fileProcessor = new FileProcessor(this.inputFile);
-        String line = fileProcessor.poll();
-        while (line != null){
-            this.paragraph = this.paragraph + line;
-            line = fileProcessor.poll();
+        String word = fileProcessor.poll();
+        while (word != null){
+            System.out.println(word);
+            countFrequency(word);
+            this.paragraph = this.paragraph + " " + word;
+            word = fileProcessor.poll();
         }
         this.paragraph = this.paragraph.replace("null", "");
 
@@ -80,28 +79,35 @@ public class InputDetails implements InputDetailsI{
     }
 
     @Override
-    public HashMap<String, String> getMisSpelled()throws
+    public String[] getMisSpelled()throws
         FileNotFoundException, IOException{
         fileProcessor = new FileProcessor(this.misSpelledFile);
+        list = new ArrayList<String>();
         String word = fileProcessor.poll();
         while (word != null){
-            misSpelled.put(word, word);
+            list.add(word);
             word = fileProcessor.poll();
         }
 
-        return misSpelled;
+        this.misSpelled = new String[list.size()];
+        this.misSpelled = list.toArray(this.misSpelled);
+        return this.misSpelled;
     }
 
     @Override
-    public HashMap<String, String> getKeyWords()throws
+    public String[] getKeyWords()throws
         FileNotFoundException, IOException{
         fileProcessor = new FileProcessor(this.keyWordsFile);
+        list = new ArrayList<String>();
         String word = fileProcessor.poll();
         while (word != null){
-            keywords.put(word, word);
+            list.add(word);
             word = fileProcessor.poll();
         }
-        return keywords;
+
+        this.keywords = new String[list.size()];
+        this.keywords = list.toArray(this.keywords);
+        return this.keywords;
     }
 
     @Override
