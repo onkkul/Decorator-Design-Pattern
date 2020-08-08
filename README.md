@@ -1,8 +1,7 @@
 # CSX42: Assignment 3
 **Name: Onkar Kulkarni**</br>
 **Email: okulkar4@binghamton.edu**</br>
-**Please note that I am using NOT using any slack day.**</br>
-tar -cvzf csx42-summer-2020-assign5-onkkul.tar.gz csx42-summer-2020-assign5-onkkul/
+**Please note that I am using all (remaining 4) slack days.**</br>
 -----------------------------------------------------------------------
 
 Following are the commands and the instructions to run ANT on your project.
@@ -35,7 +34,11 @@ Note: Arguments accept the absolute path of the files.
 
 
 ## Description:
-
+- DataStructure used: List -> space complexity = O(n)
+    - to Append : time complexity = O(1), 
+    - to Search : time complexity = O(n) where n is size
+    - to remove : time complexity = O(1)
+- FileProcessor.java partially contributed by Pradyumna Kaushik.
 
 ## Academic Honesty statement:
 
@@ -46,4 +49,4 @@ submitted to the Academic Honesty Committee of the Watson School to
 determine the action that needs to be taken. "
 
 Onkar Kulkarni</br>
-Date: 08/03/2020
+Date: 08/08/2020
