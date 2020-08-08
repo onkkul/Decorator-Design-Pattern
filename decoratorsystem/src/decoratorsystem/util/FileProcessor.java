@@ -42,7 +42,7 @@ public final class FileProcessor {
 
         File fileToRead = new File(inputFilePath);
         if (fileToRead.length() == 0){
-        	throw new IOException("File is empty");
+        	throw new IOException("Empty file: " + inputFilePath);
         }
 
         // reader = new BufferedReader(new FileReader(fileToRead));

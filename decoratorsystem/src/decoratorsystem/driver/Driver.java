@@ -69,16 +69,14 @@ public class Driver {
         try{
             InputDetailsI inputADT = new InputDetails(fileNames);
 
-
-            // System.out.println(inputADT.readParagraph());
-            // System.out.println(inputADT.getMostFrequent());
-            // System.out.println(Arrays.toString(inputADT.getMisSpelled()));
-            // System.out.println(Arrays.toString(inputADT.getKeyWords()));
             AbstractTextDecorator sentenceDecorator = new SentenceDecorator(null, inputADT);
             AbstractTextDecorator spellCheckDecorator = new SpellCheckDecorator(sentenceDecorator, inputADT);
             AbstractTextDecorator keywordDecorator = new KeywordDecorator(spellCheckDecorator, inputADT);
             AbstractTextDecorator mostFreqWordDecorator = new MostFrequentWordDecorator(keywordDecorator, inputADT);
             mostFreqWordDecorator.processInputDetails();
+
+            System.out.println(sentenceDecorator.getResult());
+
         }
         catch (Exception e){
             e.printStackTrace();
