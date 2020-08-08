@@ -20,7 +20,7 @@ import textdecorators.decorators.MostFrequentWordDecorator;
  */
 public class Driver {
 
-	private static final int REQUIRED_ARGS = 5;
+	private static final int REQUIRED_ARGS = 4;
     public static String[] fileNames;
 
 
@@ -30,14 +30,14 @@ public class Driver {
      */
     private static void validateInputs(String[] args){
 
-        String[] defaults = {"input", "misspelled", "keywords", "output", "debug"};
+        String[] defaults = {"input", "misspelled", "keywords", "debug"};
 
         if (args.length != REQUIRED_ARGS) {
             System.err.printf("Error: Incorrect number of arguments. Program accepts %d arguments.", REQUIRED_ARGS);
             System.exit(0);
         }
 
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 4; i++){
             if (args[i].equals(defaults[i])){
                 System.err.printf("Error: Incorrect input file.");
                 System.exit(0);

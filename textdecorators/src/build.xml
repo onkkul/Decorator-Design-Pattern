@@ -48,7 +48,6 @@
 			<arg value="${input}"/>                <!-- input file -->
 			<arg value="${misspelled}"/>           <!-- misspelled file -->
 			<arg value="${keywords}"/>             <!-- keywords file -->
-			<arg value="${output}"/>               <!-- output file -->
 			<arg value="${debug}"/>                <!-- debug file -->
 		</java>	
 	</target>
