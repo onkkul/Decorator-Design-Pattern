@@ -1,23 +1,14 @@
-package decoratorsystem.adt;
+package textdecorators.adt;
 
-import java.util.HashMap;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.InvalidPathException;
-
-import decoratorsystem.util.FileProcessor;
-
+import textdecorators.util.FileProcessor;
 
 public class InputDetails implements InputDetailsI{
     private String inputFile;
@@ -27,19 +18,19 @@ public class InputDetails implements InputDetailsI{
     private Scanner scanner = null;
     private FileProcessor fileProcessor = null;
 
+    private int maxFreq = 0;
     private String paragraph;
     private String result = "";
-    private String[] sentences;
-    private String[] words;
+    private String mostFreqWord = "";
 
     private List<String> keywords = null;
     private List<String> misSpelled = null;
     private HashMap<String, Integer> frequency = new HashMap<String, Integer>();
 
-    private int maxFreq = 0;
-    private String mostFreqWord = "";
-
-
+    /** Constructor for InputDetails class
+     * @exception FileNotFoundException when input files are not present
+     * @exception IOException if unable to read input files
+     */
     public InputDetails(String[] fileNames) throws
         FileNotFoundException, IOException{
             this.inputFile = fileNames[0];
@@ -51,6 +42,10 @@ public class InputDetails implements InputDetailsI{
             this.scanner = new Scanner(this.paragraph);
     }
 
+    /** Finds the most freq. word in the passage
+     * @exception None
+     * @return void
+     */
     public void countFrequency(String word){
         word = word.replace(".", "");
         int previous = this.frequency.getOrDefault(word.toLowerCase(), 0);
@@ -63,10 +58,12 @@ public class InputDetails implements InputDetailsI{
         }
     }
 
-    public String[] getSentences(String prgrph){
-        String[] allSentences = prgrph.split("(?<=[.!?])\\s*", -2);
-        return allSentences;
-    }
+
+    /** Read input.txt file
+     * @exception FileNotFoundException when file is not present
+     * @exception IOException if unable to read file
+     * @return void
+     */
     @Override
     public void readInput()throws
         FileNotFoundException, IOException{
@@ -78,11 +75,13 @@ public class InputDetails implements InputDetailsI{
             this.paragraph = this.paragraph + word + " ";
             word = fileProcessor.poll();
         }
-
-        this.sentences = getSentences(this.paragraph);
     }
 
-
+    /** Read misspelled.txt file
+     * @exception FileNotFoundException when file is not present
+     * @exception IOException if unable to read file
+     * @return void
+     */
     @Override
     public void readMisSpelled()throws
         FileNotFoundException, IOException{
@@ -96,6 +95,11 @@ public class InputDetails implements InputDetailsI{
     }
 
 
+    /** Read keywords.txt file
+     * @exception FileNotFoundException when file is not present
+     * @exception IOException if unable to read file
+     * @return void
+     */
     @Override
     public void readKeyWords()throws
         FileNotFoundException, IOException{
@@ -108,27 +112,48 @@ public class InputDetails implements InputDetailsI{
         }
     }
 
+    /** Get the most freq. word in the passage
+     * @exception None
+     * @return String most freq word
+     */
     @Override
     public String getMostFrequent(){
         return this.mostFreqWord;
     }
 
-
+    /** Get the list of misspelled words
+     * @exception None
+     * @return List list(mispelled words)
+     */
     @Override
     public List<String> getMisSpelled(){
         return this.misSpelled;
     }
+
+    /** Get the list of key words
+     * @exception None
+     * @return List list(key words)
+     */
     @Override
     public List<String> getKeyWords(){
         return this.keywords;
     }
 
+    /** Get the next word in the passage
+     * @exception None
+     * @return String
+     */
     @Override
     public String getNextWord(){
         if (scanner.hasNext())
             return scanner.next();
         return null;
     }
+
+    /** Write the in-place edited (decorated) word
+     * @exception None
+     * @return void
+     */
     @Override
     public void writeNextWord(String word, boolean done){
         if (done){
@@ -141,12 +166,20 @@ public class InputDetails implements InputDetailsI{
         }
     }
 
+    /** Get the passage
+     * @exception None
+     * @return String the passage
+     */
     @Override
     public String getParagraph(){
         this.paragraph = this.paragraph.replace("null", "");
         return this.paragraph;
     }
 
+    /** Set the passage
+     * @exception None
+     * @return void
+     */
     @Override
     public void setParagraph(String paragraph){
         this.paragraph = paragraph;

@@ -1,4 +1,4 @@
-<project name="decoratorsystem" default="compile_all" basedir="..">
+<project name="textdecorators" default="compile_all" basedir="..">
 
 	<property name="BUILD.compiler"       value="modern"/>
 	<property name="src"                  value="src"/>
@@ -7,7 +7,7 @@
 
 	<target name="all" depends="compile_all"/>
 
-	<target name="compile_all" depends="decoratorsystem"/>
+	<target name="compile_all" depends="textdecorators"/>
 
 	<target name="clean">
 		<delete dir="${BUILD}"/>
@@ -21,9 +21,9 @@
 
 	<target name="jar">
         <mkdir dir="${BUILD}/jar"/>
-        <jar destfile="${BUILD}/jar/decoratorsystem.jar" basedir="${BUILD}/classes">
+        <jar destfile="${BUILD}/jar/textdecorators.jar" basedir="${BUILD}/classes">
             <manifest>
-                <attribute name="Main-Class" value="decoratorsystem.driver.Driver"/>
+                <attribute name="Main-Class" value="textdecorators.driver.Driver"/>
             </manifest>
         </jar>
     </target>
@@ -32,9 +32,9 @@
   <!-- * means all files in the current directory -->
   <!-- for just java files use *.java -->
 
-	<target name="decoratorsystem" depends="prepare">
+	<target name="textdecorators" depends="prepare">
 		<javac includeantruntime="false" srcdir="${src}"
-			includes="decoratorsystem/**"
+			includes="textdecorators/**"
 			excludes="**/package.html"
 			destdir="${classes}"
 			classpath="${classes}"
@@ -44,7 +44,7 @@
 	</target>
 
 	<target name="run" depends="jar">
-		<java jar="${BUILD}/jar/decoratorsystem.jar"  fork="true">
+		<java jar="${BUILD}/jar/textdecorators.jar"  fork="true">
 			<arg value="${input}"/>                <!-- input file -->
 			<arg value="${misspelled}"/>           <!-- misspelled file -->
 			<arg value="${keywords}"/>             <!-- keywords file -->

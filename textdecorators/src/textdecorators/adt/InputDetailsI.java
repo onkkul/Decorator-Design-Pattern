@@ -1,21 +1,14 @@
-package decoratorsystem.adt;
+package textdecorators.adt;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
+
 import java.io.IOException;
 import java.io.FileNotFoundException;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.InvalidPathException;
+import java.util.Scanner;
 
 public interface InputDetailsI{
-    // public void setInputFile(String fileName);
     public void readInput() throws
         FileNotFoundException, IOException;
 

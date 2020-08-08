@@ -1,29 +1,16 @@
-package decoratorsystem.driver;
+package textdecorators.driver;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.nio.file.InvalidPathException;
 
-import decoratorsystem.util.Results;
-import decoratorsystem.util.FileProcessor;
-
-import decoratorsystem.adt.InputDetails;
-import decoratorsystem.adt.InputDetailsI;
-import decoratorsystem.decorators.AbstractTextDecorator;
-import decoratorsystem.decorators.SentenceDecorator;
-import decoratorsystem.decorators.SpellCheckDecorator;
-import decoratorsystem.decorators.KeywordDecorator;
-import decoratorsystem.decorators.MostFrequentWordDecorator;
+import textdecorators.adt.InputDetails;
+import textdecorators.adt.InputDetailsI;
+import textdecorators.decorators.AbstractTextDecorator;
+import textdecorators.decorators.SentenceDecorator;
+import textdecorators.decorators.SpellCheckDecorator;
+import textdecorators.decorators.KeywordDecorator;
+import textdecorators.decorators.MostFrequentWordDecorator;
 
 
 

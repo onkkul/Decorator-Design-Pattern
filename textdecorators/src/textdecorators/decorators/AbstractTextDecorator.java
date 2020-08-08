@@ -1,6 +1,4 @@
-package decoratorsystem.decorators;
-
-
+package textdecorators.decorators;
 
 public abstract class AbstractTextDecorator {
     public abstract void processInputDetails();

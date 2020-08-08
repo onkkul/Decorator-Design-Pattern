@@ -1,5 +1,5 @@
 // FIXME: replace XYZ with the package name for the assignment
-package decoratorsystem.util;
+package textdecorators.util;
 
 public class MyLogger{
 

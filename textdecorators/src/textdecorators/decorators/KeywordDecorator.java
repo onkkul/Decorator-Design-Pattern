@@ -1,27 +1,32 @@
-package decoratorsystem.decorators;
+package textdecorators.decorators;
 
-import decoratorsystem.decorators.AbstractTextDecorator;
-import decoratorsystem.adt.InputDetailsI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
+
+import textdecorators.adt.InputDetailsI;
+import textdecorators.decorators.AbstractTextDecorator;
+
 
 public class KeywordDecorator extends AbstractTextDecorator{
     private String result = null;
     private InputDetailsI inputADT = null;
     private AbstractTextDecorator atd = null;
 
-
+    /** Constructor for KeywordDecorator class
+     * @exception None
+     */
     public KeywordDecorator(AbstractTextDecorator atdIn, InputDetailsI inputADT) {
         this.atd = atdIn;
         this.inputADT = inputADT;
     }
 
+    /** Processor for KeywordDecorator class that decorates words
+     * @exception None
+     * @return void
+     */
     @Override
     public void processInputDetails() {
         boolean fullStop = false;
@@ -61,12 +66,17 @@ public class KeywordDecorator extends AbstractTextDecorator{
         this.result = this.inputADT.getParagraph();
         String temp = "--------KeywordDecorator--------\n"+this.result+"\n--------END--------\n";
         writeLog(temp);
+
         // // Forward to the next decorator, if any.
         if (this.atd != null) {
             this.atd.processInputDetails();
         }
     }
 
+    /** Write the processesed result
+     * @exception IOException if failed to write result
+     * @return void
+     */
     public void writeLog(String text){
         try{
             File logFile = new File("log.txt");
@@ -83,7 +93,10 @@ public class KeywordDecorator extends AbstractTextDecorator{
         }
     }
 
-
+    /** Get the result of this decorator
+     * @exception None
+     * @return String current result
+     */
     @Override
     public String getResult(){
         return this.result;

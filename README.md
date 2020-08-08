@@ -2,7 +2,7 @@
 **Name: Onkar Kulkarni**</br>
 **Email: okulkar4@binghamton.edu**</br>
 **Please note that I am using NOT using any slack day.**</br>
-
+tar -cvzf csx42-summer-2020-assign5-onkkul.tar.gz csx42-summer-2020-assign5-onkkul/
 -----------------------------------------------------------------------
 
 Following are the commands and the instructions to run ANT on your project.

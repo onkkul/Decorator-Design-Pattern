@@ -1,46 +1,60 @@
-package decoratorsystem.decorators;
+package textdecorators.decorators;
 
-import decoratorsystem.decorators.AbstractTextDecorator;
-import decoratorsystem.adt.InputDetailsI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class KeywordDecorator extends AbstractTextDecorator{
+import textdecorators.adt.InputDetailsI;
+import textdecorators.decorators.AbstractTextDecorator;
+
+public class SpellCheckDecorator extends AbstractTextDecorator{
     private String result = null;
     private InputDetailsI inputADT = null;
     private AbstractTextDecorator atd = null;
 
-
-    public KeywordDecorator(AbstractTextDecorator atdIn, InputDetailsI inputADT) {
+    /** Constructor for SpellCheckDecorator class
+     * @exception None
+     */
+    public SpellCheckDecorator(AbstractTextDecorator atdIn, InputDetailsI inputADT) {
         this.atd = atdIn;
         this.inputADT = inputADT;
     }
 
+    /** Processor for SpellCheckDecorator class that decorates words
+     * @exception None
+     * @return void
+     */
     @Override
     public void processInputDetails() {
         boolean fullStop = false;
         boolean mostFreq = false;
+        boolean keyword = false;
+        List<String> misSpelled = this.inputADT.getMisSpelled();
 
-        List<String> keywords = this.inputADT.getKeyWords();
         String word = this.inputADT.getNextWord();
         while (word != null){
             if (word.contains("."))
                 fullStop = true;
             if (word.contains("MOST_FREQUENT"))
                 mostFreq = true;
+            if (word.contains("KEYWORD"))
+                keyword = true;
 
             word = word.replace(".", "");
             word = word.replace("MOST_FREQUENT_", "");
             word = word.replace("_MOST_FREQUENT", "");
+            word = word.replace("KEYWORD_", "");
+            word = word.replace("_KEYWORD", "");
 
-            if (keywords.contains(word.toLowerCase()))
+            if (misSpelled.contains(word))
+                word = "SPELLCHECK_"+word+"_SPELLCHECK";
+
+            if (keyword){
                 word = "KEYWORD_"+word+"_KEYWORD";
+                keyword = false;
+            }
 
             if (mostFreq){
                 word = "MOST_FREQUENT_" + word + "_MOST_FREQUENT";
@@ -59,14 +73,19 @@ public class KeywordDecorator extends AbstractTextDecorator{
             this.inputADT.writeNextWord("", true);
 
         this.result = this.inputADT.getParagraph();
-        String temp = "--------KeywordDecorator--------\n"+this.result+"\n--------END--------\n";
+        String temp = "--------SpellCheckDecorator--------\n"+this.result+"\n--------END--------\n";
         writeLog(temp);
-        // // Forward to the next decorator, if any.
-        if (this.atd != null) {
-            this.atd.processInputDetails();
+
+        // Forward to the next decorator, if any.
+        if (null != atd) {
+            atd.processInputDetails();
         }
     }
 
+    /** Write the processesed result
+     * @exception IOException if failed to write result
+     * @return void
+     */
     public void writeLog(String text){
         try{
             File logFile = new File("log.txt");
@@ -83,10 +102,12 @@ public class KeywordDecorator extends AbstractTextDecorator{
         }
     }
 
-
+    /** Get the result of this decorator
+     * @exception None
+     * @return String current result
+     */
     @Override
     public String getResult(){
         return this.result;
     }
-
 }

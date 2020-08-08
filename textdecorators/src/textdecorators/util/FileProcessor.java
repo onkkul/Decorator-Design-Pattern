@@ -1,11 +1,12 @@
-package decoratorsystem.util;
+package textdecorators.util;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
